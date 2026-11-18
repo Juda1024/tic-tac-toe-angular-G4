@@ -1,1 +1,852 @@
+/* =========================================================
+   GRID/09 — Arcade
+   1. base           5. vista tablero
+   2. cabecera       6. pie
+   3. composición    7. responsive / altura
+   4. selector
+   ========================================================= */
+
+/* ---------- 1. base ---------- */
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 4px;
+  border: var(--line) solid var(--ink);
+  background: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* altura DEFINIDA: las unidades cqh del tablero lo necesitan */
+.app {
+  height: 100vh;
+  height: 100svh;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 44px);
+  display: flex;
+  flex-direction: column;
+}
+
+.view {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ---------- 2. cabecera ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0 12px;
+  border-bottom: var(--line-thick) solid var(--ink);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 19px;
+  line-height: 1;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+
+.tag {
+  padding: 5px 9px;
+  border: var(--line) solid var(--ink);
+  background: var(--yellow);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---------- 3. composición ---------- */
+.view-select {
+  flex: 1 1 auto;
+  padding-top: clamp(14px, 2.2vw, 26px);
+  padding-bottom: clamp(12px, 1.8vw, 20px);
+  min-height: 0;
+}
+
+.layout {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(20px, 3.2vw, 44px);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6.4vw, 82px);
+  font-weight: 900;
+  line-height: 0.84;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.hero-sub {
+  margin-top: 14px;
+  max-width: 34ch;
+  font-size: 14px;
+}
+
+.start-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: clamp(14px, 2vw, 20px);
+  padding: 10px 12px;
+  border: var(--line-thick) solid var(--ink);
+  background: var(--paper);
+  box-shadow: var(--shadow-lg);
+}
+
+.start-mode {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.start-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.start-mode strong {
+  font-family: var(--font-display);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 26px;
+  border: var(--line-thick) solid var(--ink);
+  background: var(--accent);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 var(--ink);
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.cta:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--ink);
+  background: #ff5b31;
+}
+
+.cta:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.cta-arrow {
+  font-size: 12px;
+}
+
+.cta--small {
+  padding: 9px 15px;
+  font-size: 12.5px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* ---------- 4. selector ---------- */
+.picker {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.picker-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.picker-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.picker-keys {
+  display: flex;
+  gap: 4px;
+}
+
+.mode-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: minmax(74px, 1fr);
+  gap: 18px;
+}
+
+.mode-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 15px;
+  border: var(--line) solid var(--ink);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.mode-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.mode-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.mode-card.is-selected {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: var(--shadow-lg);
+}
+
+.mode-card:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* con puntero no se dibuja anillo: el foco programático al volver del
+   tablero no debe parecer parte del diseño */
+body:not(.is-keyboard) .mode-card:focus-visible {
+  outline: none;
+}
+
+.mode-key {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border: var(--line) solid currentColor;
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.mode-card.is-selected .mode-key {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+}
+
+.mode-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  padding-right: 24px;
+}
+
+.mode-code {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.mode-name {
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: -0.01em;
+}
+
+.mode-desc {
+  font-size: 11.5px;
+  opacity: 0.75;
+}
+
+.mode-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  background: var(--accent);
+  color: var(--paper);
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0.7);
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.mode-card.is-selected .mode-check {
+  opacity: 1;
+  transform: none;
+}
+
+.mode-card--duo .mode-code {
+  color: var(--blue);
+  opacity: 1;
+}
+
+/* ---------- 5. vista tablero ---------- */
+.view-game {
+  flex: 1 1 auto;
+  gap: 10px;
+  padding-top: clamp(12px, 2vw, 20px);
+  padding-bottom: clamp(10px, 1.8vw, 16px);
+}
+
+.arena-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ghost {
+  padding: 7px 11px;
+  border: var(--line) solid var(--ink);
+  background: var(--paper);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.ghost:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.ghost--static {
+  cursor: default;
+  box-shadow: none;
+}
+
+.ghost--static:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.arena-code {
+  display: block;
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.arena-mode {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.2vw, 32px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.status {
+  padding: 8px 11px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  /* el texto cambia durante la partida; no debe mover el tablero */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status--win {
+  background: var(--accent);
+  /* crema sobre naranja no llega a 4.5:1; tinta sí */
+  color: var(--ink);
+}
+
+.status--draw {
+  background: var(--blue);
+}
+
+.board-slot {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 3px 0;
+  container-type: size;
+}
+
+/* El tablero vive dentro de un panel: lo separa de la hoja y lo
+   convierte en un objeto con peso propio. */
+.board-frame {
+  width: min(100%, 620px, 100cqh);
+  padding: clamp(10px, 1.4vw, 16px);
+  background: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+
+.board {
+  display: grid;
+  /* minmax(0, …): una marca grande nunca puede estirar las filas */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: var(--line-thick);
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--ink);
+  /* el tablero es su propio contenedor: la marca se mide contra él,
+     no contra la ventana, así no desborda cuando el tablero es pequeño */
+  container-type: size;
+}
+
+.board:focus,
+.board:focus-visible {
+  outline: none;
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: var(--cell);
+  font-family: var(--font-display);
+  /* 25 % del lado del tablero ≈ 75 % de la casilla, a cualquier tamaño */
+  font-size: 25cqmin;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.cell:not(:disabled):hover {
+  background: var(--paper-2);
+}
+
+.cell:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: -5px;
+}
+
+.cell-x {
+  color: var(--accent);
+}
+
+.cell-o {
+  color: var(--blue);
+}
+
+.cell.is-winning,
+.cell.winning-cell {
+  background: var(--yellow);
+}
+
+/* sobre amarillo la marca va en tinta: naranja sobre amarillo no se lee */
+.cell.is-winning span,
+.cell.winning-cell span {
+  color: var(--ink);
+}
+
+.board.is-resolved .cell {
+  cursor: default;
+  pointer-events: none;
+}
+
+.board.is-resolved .cell:not(.is-winning) {
+  opacity: 0.4;
+}
+
+.players {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: var(--line) solid var(--ink);
+  background: var(--paper);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.player.is-active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.player-mark {
+  font-family: var(--font-display);
+  font-size: 15px;
+}
+
+.player--x .player-mark {
+  color: var(--accent);
+}
+
+.player--o .player-mark {
+  color: var(--blue);
+}
+
+.arena-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.note {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  text-align: right;
+}
+
+/* ---------- 6. pie ---------- */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0 13px;
+  border-top: var(--line-thick) solid var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ---------- 7. responsive / altura ---------- */
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .hero-title {
+    font-size: clamp(40px, 9vw, 64px);
+  }
+
+  .hero-sub {
+    margin-top: 10px;
+  }
+
+  .mode-grid {
+    flex: 0 0 auto;
+    grid-auto-rows: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .mode-card {
+    padding: 10px 12px;
+  }
+
+  .mode-desc {
+    display: none;
+  }
+
+  .hero-sub {
+    display: none;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  .cta--small {
+    width: 100%;
+  }
+
+  .start-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .start-bar .cta {
+    width: 100%;
+  }
+
+  .arena-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .note {
+    text-align: center;
+  }
+}
+
+/* alturas cortas: el contenido se recoge, el CTA no se mueve */
+@media (max-height: 760px) {
+  .hero-title {
+    font-size: clamp(36px, 5vw, 60px);
+  }
+
+  .hero-sub {
+    display: none;
+  }
+
+  .mode-desc {
+    display: none;
+  }
+
+  .mode-card {
+    padding: 9px 13px;
+  }
+
+  .mode-key {
+    width: 33px;
+    height: 33px;
+    flex-basis: 33px;
+    font-size: 15px;
+  }
+
+  .mode-grid {
+    grid-auto-rows: minmax(58px, 1fr);
+    gap: 8px;
+  }
+
+  .cta {
+    padding: 13px 18px;
+    font-size: 16px;
+  }
+
+  .status {
+    padding: 7px 10px;
+  }
+}
+
+@media (max-height: 640px) {
+  .brand-name {
+    display: none;
+  }
+
+  .player {
+    padding: 5px 8px;
+  }
+
+  .start-bar {
+    padding: 8px 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
 /* You can add global styles to this file, and also import other style files */
+/* =========================================================
+   GRID/09 — base y tokens (neo-brutalista)
+   Papel, tinta y dos acentos planos. Sin degradados ni brillos.
+   ========================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* ---- papel / tinta ---- */
+  --paper: #f2efe6;
+  --paper-2: #e5e0d2;
+  /* el tablero es un objeto: superficie propia, más clara que el papel */
+  --cell: #ffffff;
+  --ink: #111112;
+  --ink-2: #3d3d42;
+
+  /* ---- acentos planos ---- */
+  --accent: #ff4a1c;
+  --blue: #1b3fd8;
+  --yellow: #ffc400;
+
+  /* ---- líneas y sombras duras ---- */
+  --line: 2px;
+  --line-thick: 3px;
+  --radius: 0px;
+  --shadow: 5px 5px 0 var(--ink);
+  --shadow-lg: 7px 7px 0 var(--ink);
+
+  /* ---- tipografía ---- */
+  --font-display: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ---- movimiento seco ---- */
+  --dur: 90ms;
+  --ease: linear;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(to right, #11111212 1px, transparent 1px),
+    linear-gradient(to bottom, #11111212 1px, transparent 1px);
+  background-size: 30px 30px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.4;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* =========================================================
+   Adaptación de los contenedores React a Angular
+   ========================================================= */
+
+/* Permite que el componente Arena ocupe el espacio disponible */
+app-arena {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Mantiene la distribución original del tablero */
+app-arena > .view-game {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+}
+
+/* Corrige el contenedor del selector de modalidades */
+app-mode-picker {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Permite que las tarjetas aprovechen el espacio disponible */
+app-mode-picker > .picker {
+  flex: 1 1 auto;
+  min-height: 0;
+}

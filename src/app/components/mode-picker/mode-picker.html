@@ -1,0 +1,66 @@
+<!-- Pantalla de selección de modalidades -->
+<section class="picker" aria-labelledby="picker-title">
+
+  <div class="picker-head">
+    <h2 class="picker-title" id="picker-title">
+      Elige rival
+    </h2>
+
+    <span class="picker-keys" aria-hidden="true">
+      <kbd>1</kbd>
+      <kbd>2</kbd>
+      <kbd>3</kbd>
+      <kbd>4</kbd>
+    </span>
+  </div>
+
+  <div
+    class="mode-grid"
+    role="group"
+    aria-labelledby="picker-title"
+  >
+
+    <!-- Genera las cuatro tarjetas desde la configuración -->
+    @for (key of modeOrder; track key; let index = $index) {
+
+      <button
+        type="button"
+        class="mode-card"
+        [class.is-selected]="mode() === key"
+        [class.mode-card--duo]="key === 'local'"
+        [attr.aria-pressed]="mode() === key"
+        [attr.aria-keyshortcuts]="index + 1"
+        (click)="selectMode.emit(key)"
+      >
+
+        <span class="mode-key" aria-hidden="true">
+          {{ index + 1 }}
+        </span>
+
+        <span class="mode-body">
+
+          <span class="mode-code">
+            {{ modes[key].code }}
+          </span>
+
+          <strong class="mode-name">
+            {{ modes[key].name }}
+          </strong>
+
+          <span class="mode-desc">
+            {{ modes[key].desc }}
+          </span>
+
+        </span>
+
+        <span class="mode-check" aria-hidden="true">
+          ✓
+        </span>
+
+      </button>
+
+    }
+
+  </div>
+
+</section>

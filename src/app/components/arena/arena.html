@@ -1,0 +1,146 @@
+<main class="view view-game">
+
+  <!-- Encabezado de la partida -->
+  <div class="arena-head">
+
+    <button
+      type="button"
+      class="ghost"
+      (click)="back.emit()"
+    >
+      <span aria-hidden="true">←</span>
+      Modos
+    </button>
+
+    <span class="ghost ghost--static">
+      3 × 3
+    </span>
+
+  </div>
+
+  <!-- Información de la modalidad seleccionada -->
+  <span class="arena-code">
+    {{ modes[mode()].code }}
+  </span>
+
+  <h1 class="arena-mode">
+    {{ modes[mode()].name }}
+  </h1>
+
+  <!-- Resultado o turno actual -->
+  <p
+    class="status"
+    [class.status--win]="statusKind() === 'win'"
+    [class.status--draw]="statusKind() === 'draw'"
+    role="status"
+    aria-live="polite"
+  >
+    {{ statusText() }}
+  </p>
+
+  <!-- Tablero de nueve casillas -->
+  <div class="board-slot">
+
+    <div class="board-frame">
+
+      <div
+        class="board"
+        role="group"
+        aria-label="Tablero de juego"
+        tabindex="-1"
+      >
+
+        @for (cell of board(); track $index; let index = $index) {
+
+          <button
+            type="button"
+            class="cell"
+            [class.cell-x]="cell === 'X'"
+            [class.cell-o]="cell === 'O'"
+            [class.winning-cell]="winningLine().includes(index)"
+            [disabled]="
+              !isPlaying() ||
+              isAITurn() ||
+              cell !== null
+            "
+            [attr.aria-label]="
+              'Casilla ' + (index + 1) + ': ' + (cell ?? 'vacía')
+            "
+            (click)="playMove(index)"
+          >
+            <span>{{ cell }}</span>
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Información de los competidores -->
+  <div class="players">
+
+    <p
+      class="player player--x"
+      [class.is-active]="
+        isPlaying() && currentPlayer() === 'X'
+      "
+    >
+
+      <span class="player-mark" aria-hidden="true">
+        X
+      </span>
+
+      <span class="player-name">
+        {{ isLocal() ? 'Jugador 1' : 'Tú' }}
+      </span>
+
+    </p>
+
+    <p
+      class="player player--o"
+      [class.is-active]="
+        isPlaying() && currentPlayer() === 'O'
+      "
+    >
+
+      <span class="player-mark" aria-hidden="true">
+        O
+      </span>
+
+      <span class="player-name">
+        {{
+          isLocal()
+            ? 'Jugador 2'
+            : modes[mode()].name
+        }}
+      </span>
+
+    </p>
+
+  </div>
+
+  <!-- Controles inferiores -->
+  <div class="arena-actions">
+
+    <button
+      type="button"
+      class="cta cta--small"
+      (click)="reset.emit()"
+    >
+      Nueva partida
+    </button>
+
+    <span class="note">
+      @if (isLocal()) {
+        Jugador 1: X · Jugador 2: O
+      } @else {
+        Tú: X · {{ modes[mode()].name }}: O
+      }
+    </span>
+
+  </div>
+
+</main>

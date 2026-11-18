@@ -1,59 +1,132 @@
-# ProyectoTictactoeAngular
+# GRID/09 – Tic-Tac-Toe Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.7.
+Videojuego de Tres en Raya desarrollado con Angular y TypeScript como parte del laboratorio de Desarrollo de Videojuegos de la Universidad de las Fuerzas Armadas ESPE.
 
-## Development server
+## Descripción
 
-To start a local development server, run:
+El proyecto implementa el juego clásico de Tres en Raya (Tic-Tac-Toe), incorporando diferentes estrategias de inteligencia artificial y un modo multijugador local.
+
+Esta versión corresponde a la implementación desarrollada con Angular y es independiente del proyecto realizado con React.
+
+## Modalidades de juego
+
+### 1. UnbeatableAI
+Inteligencia artificial basada en reglas heurísticas.
+
+- Busca movimientos ganadores.
+- Bloquea amenazas del jugador.
+- Detecta oportunidades de doble amenaza.
+- Prioriza posiciones estratégicas.
+
+### 2. MediumAI
+Inteligencia artificial de dificultad intermedia.
+
+- Prioriza la casilla central.
+- Identifica oportunidades de victoria.
+- Bloquea movimientos ganadores.
+- Selecciona posiciones libres mediante aleatoriedad.
+
+### 3. MinimaxAI
+Inteligencia artificial que utiliza el algoritmo Minimax.
+
+- Explora posibles estados futuros.
+- Evalúa victorias, derrotas y empates.
+- Selecciona movimientos óptimos.
+- Considera la profundidad de las jugadas.
+
+### 4. Multijugador local (1 vs 1)
+Modalidad adicional que permite jugar a dos personas desde el mismo dispositivo, alternando los símbolos X y O.
+
+## Tecnologías utilizadas
+
+- Angular
+- TypeScript
+- HTML5
+- CSS3
+- Angular Signals
+- Vitest
+- Node.js y npm
+- Git y GitHub
+
+## Requisitos
+
+Tener instalados:
+
+- Node.js
+- npm
+- Angular CLI
+
+## Instalación
+
+Clonar el repositorio:
 
 ```bash
-ng serve
+git clone https://github.com/Juda1024/tic-tac-toe-angular-G-4.git
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Ingresar al proyecto:
 
 ```bash
-ng generate component component-name
+cd tic-tac-toe-angular-G-4
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Instalar dependencias:
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
+## Ejecutar el videojuego
 
-To build the project run:
+```bash
+ng serve --open
+```
+
+La aplicación estará disponible normalmente en:
+
+http://localhost:4200
+
+## Pruebas automatizadas
+
+Ejecutar todas las pruebas:
+
+```bash
+ng test --watch=false
+```
+
+Las pruebas incluyen:
+
+- Validación de reglas del juego.
+- Detección de victorias y empates.
+- Validación de movimientos.
+- Evaluación de las estrategias de inteligencia artificial.
+- Verificación del algoritmo Minimax.
+- Gestión de turnos y estados.
+- Pruebas de integración de la interfaz.
+
+## Compilación
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Organización
 
-## Running unit tests
+El proyecto separa la lógica del videojuego de los componentes visuales.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- `src/app/game/`: reglas, inteligencia artificial y gestión de partidas.
+- `src/app/components/`: componentes de la interfaz.
+- `src/app/app.ts`: coordinación principal de la aplicación.
+- `src/styles.css`: estilos generales.
 
-```bash
-ng test
-```
+## Proyecto académico
 
-## Running end-to-end tests
+**Universidad:** Universidad de las Fuerzas Armadas ESPE
 
-For end-to-end (e2e) testing, run:
+**Asignatura:** Desarrollo de Videojuegos
 
-```bash
-ng e2e
-```
+**Grupo:** 4
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+**Proyecto:** Tic-Tac-Toe
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Framework:** Angular
